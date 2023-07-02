@@ -59,7 +59,16 @@ void specificRead()
     in.open(s);
     int r;
     cout<<"=========Read specific record=========\n";
-    
+    cout<<"Record number to view: ";
+    cin>>r;
+    r--;
+    in.seekg(sizeof(struct employee)*r,ios::beg);
+    in.read((char*) &emp, sizeof(struct employee));
+    if(!in.eof())
+    {
+        cout<<"Name: "<<emp.name<<"\n";
+        cout<<"";
+    }
 }
 
 
