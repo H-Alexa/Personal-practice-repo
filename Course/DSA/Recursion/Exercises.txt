@@ -1,0 +1,8 @@
+    Types of Recursion: Head, tail, indirect, nested, Tree
+    Sum of natural number
+    Factorial
+    Power
+    Taylor series (using and not using horner's rule with optimization)
+    Fibonacci
+    nCr
+    Tower of Hanoi

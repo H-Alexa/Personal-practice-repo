@@ -1,20 +1,2 @@
-1. Array implementation of Adjacency list
-2. Adjacency list using linked list
-3. Linked list using array(insertion, deletion, search)
-4. Vector and list from STL
-5. 
-
-
-
-
-
-
-
-1.
-v0 -> v2, v1
-v1 -> v0, v2
-v2 -> v1, v0
-v3 -> v2, v4
-v4 -> v1, v3
-
-
+Hello, I am Tatinee Sarker. I have currently graduated from Institute of Information Technology, Jahangirnagar University. I am drawn to programming since first year. I have participated in several coding competitions back then. An enthusiastic and adaptable learner with a passion for exploring emerging technologies. I thrive on challenges and maintain a strong focus on efficiency and organization in my work. I find joy in solving problems, be it through tech competitions or meeting client demands.
+I saw that this R&D institution leads the development of the future technologies for Samsung's products and services. As I have curiosity to learn and work on innovation, I found this job desirable.

@@ -87,7 +87,7 @@ void inp(string& s, string& t)
 int main()
 {
     string S,T;
-    inp(S,T);
+    inp(S,T)
     cout<<window(S,T);
     return 0;
 }
