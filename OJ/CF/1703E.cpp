@@ -23,11 +23,34 @@ using namespace std;
 #define todegree(rad) rad*(180.0/pi)
 #define isnttriangle(a,b,c) (a+b<c||a+c<b||b+c<a)
 #define pi acos(-1)
-#define siz 100009
-//int ar[siz];
+#define siz 1009
+char ar[siz][siz];
+int cn;
+void calc(int l, int r)
+{
+    if(l>=r) return;
+    int i;
+    int zer,on;
+    for(i=0;i<r-l;i++)
+    {
+        zer=0;on=0;
+        // cout<<r-i<<" "<<l+i<<" "<<r<<" "<<l<<"\n";
+        if(ar[r-i][l]=='0') zer++; else on++;
+        if(ar[l][l+i]=='0') zer++; else on++;
+        if(ar[l+i][r]=='0') zer++; else on++;
+        if(ar[r][r-i]=='0') zer++; else on++;
+        cn+=min(zer,on);
+    }
+    calc(++l,r-1);
+}
 void sol()
 {
-    cout<<10%4;
+    cn=0;
+    int n,i;
+    cin>>n;
+    fr(i,n) cin>>ar[i];
+    calc(0,n-1);
+    cout<<cn<<"\n";
     return;
 }
 int main()
@@ -38,4 +61,3 @@ int main()
         sol();
     return 0;
 }
-
