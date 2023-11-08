@@ -1,3 +1,5 @@
+//ACCEPTED SOLUTION
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -24,81 +26,79 @@ using namespace std;
 #define isnttriangle(a,b,c) (a+b<c||a+c<b||b+c<a)
 #define pi acos(-1)
 #define siz 200009
-ll f[siz], h[siz];
-ll n,k;
-int bs(int l, int r, int en)
+ll ar[siz];
+ll a[siz],h[siz],l[siz],r[siz];
+int bs(int lo, int hi, int val)
 {
-    cout<<l<<" "<<r<<" "<<en<<"\n";
-    if(l==r)
+    if(lo<=hi)
     {
-        if(f[en]-f[l]<=k) return 1;
-        return 0;
-    }
-    else if(l<r)
-    {
-        int mid=(l+r)/2;
-        if(f[en]-f[mid]<=k)
+        int mid=(lo+hi)/2;
+        if(ar[mid]==val) return mid;
+        else if(ar[mid]>val)
         {
-            if(mid-1==0||f[en]-f[mid-1]>k) return mid;
-            else return bs(l,mid-1,en);
+            if(ar[mid-1]<val) return mid;
+            else if(mid==lo) return lo-1;
+            else return bs(lo,mid-1,val);
         }
-        if(f[en]-f[mid]>k)
-        {
-            return bs(mid+1,r,en);
+        else{
+            
+            if(ar[mid+1]>=val) return mid+1; 
+            return bs(mid+1,hi,val);
         }
     }
     return -1;
 }
-int sub(int l, int r)
-{
-    if(l>r) return -1;
-    int mx=0;
-    int i;
-    for(i=r;i<=l;i--)
-    {
-        cout<<i<<" ";
-        mx=max(mx,i-bs(l,i,i));
-    }
-    return mx;
-}
-
 void sol()
 {
+    int n,k;
     cin>>n>>k;
-    int i;
-    f[0]=0;
-    h[0]=0;
-    ll x;
+    int i,j;
+    ll mx=0;
+    ar[0]=0;
     frs(i,1,n) {
-        cin>>x;
-        f[i]=x+f[i-1]; //consecutive sum
+        cin>>a[i];
+        ar[i]=mx+a[i];
+        mx=ar[i];
     }
-    frs(i,1,n) cin>>h[i];
-    // subarray form
-    int prev;
-    int mx=0;
+    mx=0;
+    int pt=0;
     frs(i,1,n)
     {
-        if(i==1) prev=i;
-        else
-        {
+        cin>>h[i];
+        if(i==1){
+            l[pt]=i;
+        }
+        else{
             if(h[i-1]%h[i]!=0)
             {
-                mx=max(mx,sub(prev,i-1));
-                prev=i;
+                r[pt++]=i-1;
+                l[pt]=i;
             }
         }
     }
-    mx=max(mx,sub(prev,i-1));
-    cout<<mx<<"\n";
+    r[pt++]=n;
+    int ans=0;
+    for(i=0;i<pt;i++)
+    {
+        for(j=r[i];j>l[i];j--)
+        {
+            //cout<<j<<" "<<l[i]<<"___lim\t";
+            int idx=bs(l[i],j,ar[j]-k);
+            if(idx>=0) ans=max(ans,j-idx);
+            //cout<<idx<<"\n";
+        }
+        if(a[l[i]]<=k) ans=max(ans,1);
+            //cout<<ans<<"-\n";
+
+    }
+    cout<<ans<<"\n";
     return;
 }
 int main()
 {
     int t;
     cin>>t;
-    while(t--)
-        sol();
+    while(t--) sol();
     return 0;
 }
 
