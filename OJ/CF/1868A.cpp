@@ -1,3 +1,5 @@
+//AC solution
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -23,12 +25,73 @@ using namespace std;
 #define todegree(rad) rad*(180.0/pi)
 #define isnttriangle(a,b,c) (a+b<c||a+c<b||b+c<a)
 #define pi acos(-1)
-#define siz 100009
-//int ar[siz];
+#define siz 200009
 
+void sol(){
+    int n,m;
+    cin>>n>>m;
+    if(m==1) {
+        cout<<"0\n";
+        while(n--) cout<<"0\n";
+    }
+    else if(m==2||n==1) {
+        cout<<"2\n";
+        if(n==1) {
+            for(int i=0;i<m;i++) cout<<i<<" ";
+            ne;
+        }
+        else{
+            while(n--) cout<<"0 1\n";
+        }
+    }
+    else {
+        if(n<m) {
+            cout<<n+1<<"\n";
+            int st=1;
+            while(n--)
+            {
+                int j=st;
+                for(int i=0;i<m;i++)
+                {
+                    cout<<j++<<" ";
+                    j=j%m;
+                }
+                st++;
+                ne;
+            }
+            ne;
+        
+        }
+        else {
+            cout<<m<<"\n";
+            int st=1;
+            for(int i=0;i<m-1;i++)
+            {
+                int j=st;
+                for(int i=0;i<m;i++)
+                {
+                    cout<<j++<<" ";
+                    j=j%m;
+                }
+                ne;
+                st++;
+            }
+            n=n-m+1;
+            while(n--)
+            {
+                for(int i=0;i<m;i++)
+                cout<<(i+1)%m<<" ";
+                ne;
+            }
+        }
+    }
+    return;
+}
 int main()
 {
-
+    int t;
+    cin>>t;
+    while(t--) sol();
     return 0;
 }
 
