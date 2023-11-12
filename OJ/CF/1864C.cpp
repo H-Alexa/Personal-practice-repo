@@ -1,3 +1,5 @@
+//AC solution
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -24,11 +26,47 @@ using namespace std;
 #define isnttriangle(a,b,c) (a+b<c||a+c<b||b+c<a)
 #define pi acos(-1)
 #define siz 100009
-//int ar[siz];
-
+int ar[siz];
+void sol()
+{
+    int n;
+    cin>>n;
+    int pt=1;
+    ar[0]=n;
+    int mul=1;
+    int m=n;
+    while(n>0)
+    {
+        if(n>>1==0)
+        {
+            while(mul>1)
+            {
+                ar[pt++]=mul/2;
+                mul/=2;
+            }
+            break;
+        }
+        else if(n%2==1)
+        {
+            ar[pt++]=m-mul;
+            m-=mul;
+        }
+        n=n>>1;
+        mul*=2;
+        //cout<<n<<" ";
+    }
+    //ne;
+    cout<<pt<<"\n";
+    int i;
+    fr(i,pt) cout<<ar[i]<<" ";
+    ne;
+    return;
+}
 int main()
 {
-
+    int t;
+    cin>>t;
+    while(t--) sol();
     return 0;
 }
 
