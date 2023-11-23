@@ -24,14 +24,6 @@ using namespace std;
 #define isnttriangle(a,b,c) (a+b<c||a+c<b||b+c<a)
 #define pi acos(-1)
 #define siz 1009
-char ar[siz];
-void pre()
-{
-    char c='0';
-    for(int i=0;i<1000;i++) ar[i]=c;
-    ar[1000]='\0';
-    return;
-}
 char in[200];
 int seq[500];
 void sol()
@@ -40,61 +32,84 @@ void sol()
     cin>>n;
     cin>>in;
     int no=0,nz=0;
-    if(n%2==1) {
+    fr(i,n){
+        if(in[i]=='0') nz++;
+        else no++;
+    }
+    if(n%2==1||no!=nz) {
         cout<<"-1\n";
         return;
     }
     int op=0;
-    for(i=400;i<400+n;i++) {ar[i]=in[i-400];
-    if(ar[i]=='0') nz++;
-    else no++;
-    }
-    if(no!=nz) {
-        cout<<"-1\n";
-        return;
-    }
-    s=400;
-    e=400+n-1;
-    int si,se;
-    si=0;
-    se=n-1;
-    while(s<e&&op<=300)
+    int o=0;
+    int z=0;
+    s=0;
+    e=n-1;
+    while(s<e)
     {
-        if(ar[s]!=ar[e])
+        if(z>0&&o>0)
+        {
+            int m =min(z,o);
+            o-=m;
+            z-=m;
+        }
+        else if(z>0)
+        {
+            if(in[s]=='1') {
+                z--;
+                s++;
+            }
+            else{
+                z++;
+//                seq[op++]=e+o+z;
+                seq[op++]=e+z;
+                s++;
+            }
+        }
+        else if(o>0)
+        {
+            if(in[e]=='0'){
+                e--;
+                o--;
+            }
+            else{
+                seq[op++]=s;
+                o++;
+                e--;
+            }
+        }
+        else if(in[s]!=in[e])
         {
             s++;
             e--;
-            si++;
-            se--;
         }
         else{
-            if(ar[s]=='1')
+            if(in[s]=='0')
             {
-                seq[op++]=si;
-                se++;
-                s--;
-                ar[s]='1';
-                e--;
+                z++;
+                seq[op++]=e+z;
+                s++;
             }
             else{
-                seq[op++]=se+1;
-                se++;
-                si++;
-                e++;
-                s++;
-                ar[e]='0';
+                e--;
+                o++;
+                seq[op++]=s;
             }
-
         }
+        if(op>300) break;
+
+    }
+    if(op>300) {
+        cout<<"-1\n";
+        return;
     }
     cout<<op<<"\n";
-    for(i=0;i<op;i++) cout<<seq[i]<<" ";
+    fr(i,op) cout<<seq[i]<<" ";
     ne;
 }
 
 int main()
 {
-    pre();
     int t;
     cin>>t;
     while(t--) sol();
